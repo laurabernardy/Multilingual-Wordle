@@ -26,13 +26,10 @@ def fitchars(row, chars, result):
             print(inpind)
             if  resind == inpind:
                 input[resind] = 0
-                result2[resind] = 0
                 win[row,resind].update(button_color=('green'))
             else:
                 if let in input:
                     win[row,inpind].update(button_color=('yellow'))
-        else:
-            win[row,result2.index(let)].update(button_color=('blue'))
 
 
             
