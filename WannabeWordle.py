@@ -41,9 +41,12 @@ def open_window(COL=5, ROWS=6):
     window = sg.Window("", layout, modal=True)
     while True:
         event, values = window.read()
-        if event == "Exit" or event == sg.WIN_CLOSED:
+        if event == "Exit":
             window.close()
             win.close()
+            break
+        if event == sg.WIN_CLOSED:
+            window.close()
             break
         if event == 'new':
             row = -1
