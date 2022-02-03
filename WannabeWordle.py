@@ -1,5 +1,6 @@
 import PySimpleGUI as sg
 import random
+import re
 from collections import Counter 
 
 sg.theme('Default1')
@@ -10,21 +11,55 @@ with open("words.txt", "r") as file:
     result = random.choice(words)
     print (result)
 
-def fitchars(row, chars, result):
-    result2 = result
-    dict1 = Counter(str(chars))
-    dict2 = Counter(result2)
-    commonDict = dict1 & dict2
-    commonChars = list(commonDict.elements())
-    indlist = []
-    if not len(commonChars) == 0:
-        for letter in commonChars:
-            letind = result2.index(letter)
-            indlist.append(letind)
-            result2 = result[:letind] + '0' + result2[letind+1:]
-            for ind in indlist:
-                win[row,ind].update(button_color=('green'))
+def special_match(strg, search=re.compile(r'[^a-z]').search):
+         return not bool(search(strg))
 
+def fitchars(row, chars, result):
+    result2 = list(result)
+    input = chars
+    for let in result2:
+        if let in input:
+            print(input)
+            resind = result2.index(let)
+            inpind = input.index(let)
+            print(resind)
+            print(inpind)
+            if  resind == inpind:
+                input[resind] = 0
+                result2[resind] = 0
+                win[row,resind].update(button_color=('green'))
+            else:
+                if let in input:
+                    win[row,inpind].update(button_color=('yellow'))
+        else:
+            win[row,result2.index(let)].update(button_color=('blue'))
+
+
+            
+             
+    #dict1 = Counter(str(chars))
+    #dict2 = Counter(result2)
+    #commonDict = dict1 & dict2
+    #print (commonDict)
+    #commonChars = list(commonDict.elements())
+    #print(commonChars)
+    #indlist = []
+    #if not len(commonChars) == 0:
+    #    for letter in commonChars:
+    #        if letter in result2:
+    #            letind = result2.index(letter)
+    #            inpind = chars.index(letter)
+    #            indlist.append(letind)
+    #            for i in indlist:
+    #                print(i)
+    #                if i == inpind:
+    #                    result2 = result2[:inpind] + '0' + result2[inpind+1:]
+    #                    win[row,i].update(button_color=('green'))
+    #                else:
+    #                    if letter in result2:
+    #                        result2 = result2[:inpind] + '0' + result2[inpind+1:]
+    #                        print (result2)
+    #                        win[row,i].update(button_color=('yellow'))
 
 COL=5
 ROW=6
