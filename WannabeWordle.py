@@ -1,18 +1,15 @@
 import PySimpleGUI as sg
 import random
-import re
-from collections import Counter 
 
+#todo: keyboard, englisch, design, package/standalone
 sg.theme('Default1')
 
-with open("words.txt", "r") as file:
-    allText = file.read()
-    words = list(map(str.upper, allText.split()))
-    result = random.choice(words)
-    print (result)
-
-def special_match(strg, search=re.compile(r'[^a-z]').search):
-         return not bool(search(strg))
+def chooseresult():
+    with open("words.txt", "r") as file:
+        allText = file.read()
+        words = list(map(str.upper, allText.split()))
+        result = random.choice(words)
+    return result
 
 def fitchars(row, chars, result):
     result2 = list(result)
@@ -26,48 +23,49 @@ def fitchars(row, chars, result):
             print(inpind)
             if  resind == inpind:
                 input[resind] = 0
+                result2[resind] = 0
                 win[row,resind].update(button_color=('green'))
             else:
                 if let in input:
-                    win[row,inpind].update(button_color=('yellow'))
+                    win[row,inpind].update(button_color=('yellow'))  
+    if result2 == input:
+        sg.popup('YAY, GEWONNEN!')
+        open_window(COL, ROWS)
 
-
-            
+def open_window(COL=5, ROWS=6):
+    global result
+    global row
+    global win
+    layout = [[sg.Text("Und nun?")],
+        [sg.Button("Nochmal?", key="new"), sg.Button('Exit')]]
+    window = sg.Window("", layout, modal=True)
+    while True:
+        event, values = window.read()
+        if event == "Exit" or event == sg.WIN_CLOSED:
+            window.close()
+            win.close()
+            break
+        if event == 'new':
+            row = -1
+            chars=['','','','','','']
+            result = chooseresult()
+            for i in range(COL):
+                for r in range(ROWS):
+                    win[r,i].update(button_color=('white'))
+                    win[r,i].update(chars[i])
+                    window.close()
              
-    #dict1 = Counter(str(chars))
-    #dict2 = Counter(result2)
-    #commonDict = dict1 & dict2
-    #print (commonDict)
-    #commonChars = list(commonDict.elements())
-    #print(commonChars)
-    #indlist = []
-    #if not len(commonChars) == 0:
-    #    for letter in commonChars:
-    #        if letter in result2:
-    #            letind = result2.index(letter)
-    #            inpind = chars.index(letter)
-    #            indlist.append(letind)
-    #            for i in indlist:
-    #                print(i)
-    #                if i == inpind:
-    #                    result2 = result2[:inpind] + '0' + result2[inpind+1:]
-    #                    win[row,i].update(button_color=('green'))
-    #                else:
-    #                    if letter in result2:
-    #                        result2 = result2[:inpind] + '0' + result2[inpind+1:]
-    #                        print (result2)
-    #                        win[row,i].update(button_color=('yellow'))
-
+result = chooseresult()
+print(result)
 COL=5
-ROW=6
+ROWS=6
 chars=['','','','','','']
-layout =[[[sg.Button(chars[i], size=(4, 2), key=(i,j), pad=(0,0)) for j in range(COL)] for i in range(ROW)],
+layout =[[[sg.Button(chars[i], size=(4, 2), key=(i,j), pad=(0,0), button_color=('white')) for j in range(COL)] for i in range(ROWS)],
             [sg.Txt('Gib das nächste Wort ein:')],
-            [sg.In(size=(12,2), key='IN')],
-            [sg.Button('GO!'), sg.Button('Exit')]]
-
+            [sg.In(size=(12,2), key='IN', do_not_clear=False)],
+            [sg.Button('GO!', bind_return_key=True), sg.Button('Exit')]]
 win = sg.Window('WannabeWordle', layout)
-
+row = 0
 while True:             # Event Loop
     event, values = win.read()
     if event in (None, 'Exit'):
@@ -77,11 +75,11 @@ while True:             # Event Loop
             userinput = values['IN']
             chars = list(userinput)
             chars = list(map(lambda x: x.upper(), chars))
-            row = 0
             for i in range(5):
                 win[row,i].update(chars[i])
-            fitchars(row,chars, result)
+            fitchars(row,chars,result)
+            row +=1
         else: 
             sg.popup('Das Wort muss 5 Buchstaben haben!')
-        
+    
 win.close()
