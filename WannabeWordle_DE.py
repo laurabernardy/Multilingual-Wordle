@@ -1,15 +1,26 @@
 import PySimpleGUI as sg
 import random
 
-#todo: Design stuff, not in words list, multilingual version, javascript version (web app)
+#todo: Main creates new Windows everytime, Design stuff, not in words list, multilingual version, javascript version (web app)
 sg.theme('Default1')
+
+#def start():
+#    result = chooseresult()
+#    print(result)
+#    chars=['','','','','','']
+#    row = 0
+#    return result, chars, row
+
 
 #main function of game and layout
 def main():
+#    result, chars, row = start()
     result = chooseresult()
+    print(result)
+    chars=['','','','','','']
+    row = 0
     COL=5
     ROWS=6
-    chars=['','','','','','']
     topRow = 'QWERTYUIOP'
     midRow = 'ASDFGHJKL'
     bottomRow = 'ZXCVBNM'
@@ -22,7 +33,6 @@ def main():
                 [sg.Text(' ' * 18)] + [sg.Button(c, key=c, size=(2, 1)) for c in bottomRow] + [sg.Stretch()]]
     
     win = sg.Window('WannabeWordle', layout, element_justification='c')
-    row = 0
     while True:             # Event Loop
         event, values = win.read()
         if event in (None, 'Exit'):
@@ -56,6 +66,19 @@ def chooseresult():
         result = random.choice(words)
     return result
 
+def duplist(seq, letter):
+    start_at = -1
+    dups = []
+    while True:
+        try:
+            dup = seq.index(letter,start_at+1)
+        except ValueError:
+            break
+        else:
+            dups.append(dup)
+            start_at = dup
+    return dups
+
 #search for matching characters between input and result
 #mark characters with specific colors
 #win or loose message
@@ -68,17 +91,30 @@ def fitchars(win, row, chars, result):
     badchars = set(chars) - set(common)
     for b in badchars:
         win[b].update(button_color=('Grey'))
-    for let in result2:
+    for i in range(len(result2)):
+        let = result2[i]
         if let in input:
-            resind = result2.index(let)
             inpind = input.index(let)
-            if  resind == inpind:
-                input[resind] = 0
-                result2[resind] = 0
-                win[row,resind].update(button_color=('green'))
-            else:
-                if let in input:
-                    win[row,inpind].update(button_color=('yellow'))  
+            nrres = result2.count(let)
+            nrinp = input.count(let)
+            dupsres = duplist(input, let)
+            dupsinp = duplist(result2, let)
+            commondups = list(set(dupsinp).intersection(dupsres))
+            if nrres >= nrinp:
+                 win[row, inpind].update(button_color=('yellow'))  
+            for cdup in commondups:
+                input[cdup] = 0
+                result2[cdup] = 0
+                win[row,cdup].update(button_color=('green'))
+#            else:
+#                dups = duplist(input, let)
+#                if nrinp == 1 and nrres == 1:
+#                    win[row, inpind].update(button_color=('yellow'))  
+#                    else:
+#                   
+#                    if nrdups == nrres:
+#                        for dupind in dups:
+#                            win[row, dupind].update(button_color=('yellow'))  
     if result2 == input:
         sg.popup('YAY, GEWONNEN!')
         open_window(win)
@@ -91,7 +127,7 @@ def open_window(win):
     global result
     global row
     layout = [[sg.Text("Und nun?")],
-        [sg.Button("Nochmal?", key="new"), sg.Button('Exit')]]
+        [sg.Button("Nochmal?", key="new", bind_return_key=True), sg.Button('Exit')]]
     window = sg.Window("", layout, modal=True)
     while True:
         event, values = window.read()
