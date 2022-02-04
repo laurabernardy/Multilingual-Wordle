@@ -16,7 +16,6 @@ sg.theme('Default1')
 def main():
 #    result, chars, row = start()
     result = chooseresult()
-    print(result)
     chars=['','','','','','']
     row = 0
     COL=5

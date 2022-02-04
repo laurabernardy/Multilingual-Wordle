@@ -7,7 +7,6 @@ sg.theme('Default1')
 #main function of game and layout
 def main():
     result = chooseresult()
-    print(result)
     COL=5
     ROWS=6
     chars=['','','','','','']
