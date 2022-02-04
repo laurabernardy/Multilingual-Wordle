@@ -3,16 +3,23 @@ import random
 
 #todo: Design stuff, not in words list, multilingual version, javascript version (web app)
 sg.theme('Default1')
+sg.theme_button_color(('black', '#fdfefe'))
+
+def start():
+    result = chooseresult()
+    chars=['','','','','','']
+    row = 0
+    return result, chars, row
+
 
 #main function of game and layout
 def main():
-    result = chooseresult()
+    result, chars, row = start()
     COL=5
     ROWS=6
-    chars=['','','','','','']
-    topRow = 'QWERTYUIOP'
+    topRow = 'QWERTZUIOP'
     midRow = 'ASDFGHJKL'
-    bottomRow = 'ZXCVBNM'
+    bottomRow = 'YXCVBNM'
     layout =[[[sg.Button(chars[i], size=(4, 2), key=(i,j), pad=(0,0), button_color=('white')) for j in range(COL)] for i in range(ROWS)],
                 [sg.Txt('Gib das nächste Wort ein:')],
                 [sg.In(size=(12,2), key='IN', do_not_clear=False, focus=True)],
@@ -22,7 +29,6 @@ def main():
                 [sg.Text(' ' * 18)] + [sg.Button(c, key=c, size=(2, 1)) for c in bottomRow] + [sg.Stretch()]]
     
     win = sg.Window('WannabeWordle', layout, element_justification='c')
-    row = 0
     while True:             # Event Loop
         event, values = win.read()
         if event in (None, 'Exit'):
@@ -37,8 +43,17 @@ def main():
                 chars = list(map(lambda x: x.upper(), chars))
                 for i in range(5):
                     win[row,i].update(chars[i])
-                fitchars(win, row, chars, result)
-                row +=1
+                row, chars, result, new_game = fitchars(win, row,chars,result)
+                if new_game:
+                    for i in range(ROWS): 
+                        for j in range(COL):
+                            win[i,j].update(chars[i], button_color=('White'))
+                    for c in topRow:
+                        win[c].update(button_color=sg.theme_button_color())
+                    for c in midRow:
+                        win[c].update(button_color=sg.theme_button_color())
+                    for c in bottomRow:
+                        win[c].update(button_color=sg.theme_button_color())
             else: 
                 sg.popup('Das Wort muss 5 Buchstaben haben!')
         if event == sg.WIN_CLOSED:
@@ -99,29 +114,33 @@ def fitchars(win, row, chars, result):
                 win[row,cdup].update(button_color=('green'))
     if result2 == input:
         sg.popup('YAY, GEWONNEN!')
-        open_window(win)
-    if row == 5 and result != chars:
+        new_game = open_window(win)
+    elif row == 5 and result != chars:
         sg.popup('OH NO! DAS WAR WOHL NIX.')
-        open_window(win)
+        new_game = open_window(win)
+    else: 
+        row +=1
+        new_game = False
+    if new_game:
+        result, chars, row = start()
+    return row, chars, result, new_game
 
 #choose if you want to play another round    
 def open_window(win):
-    global result
-    global row
     layout = [[sg.Text("Und nun?")],
-        [sg.Button("Nochmal?", bind_return_key=True, key="new"), sg.Button('Exit')]]
+        [sg.Button("Nochmal?", key="new", bind_return_key=True), sg.Button('Exit')]]
     window = sg.Window("", layout, modal=True)
     while True:
         event, values = window.read()
         if event == "Exit":
             window.close()
             win.close()
-            break
+            return False
         if event == sg.WIN_CLOSED:
             window.close()
-            break
+            return False
         if event == 'new':
             window.close()
-            main()
+            return True
 
 main()

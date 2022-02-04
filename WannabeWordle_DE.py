@@ -1,28 +1,25 @@
 import PySimpleGUI as sg
 import random
 
-#todo: Main creates new Windows everytime, Design stuff, not in words list, multilingual version, javascript version (web app)
+#todo: Design stuff, not in words list, multilingual version, javascript version (web app)
 sg.theme('Default1')
+sg.theme_button_color(('black', '#fdfefe'))
 
-#def start():
-#    result = chooseresult()
-#    print(result)
-#    chars=['','','','','','']
-#    row = 0
-#    return result, chars, row
+def start():
+    result = chooseresult()
+    chars=['','','','','','']
+    row = 0
+    return result, chars, row
 
 
 #main function of game and layout
 def main():
-#    result, chars, row = start()
-    result = chooseresult()
-    chars=['','','','','','']
-    row = 0
+    result, chars, row = start()
     COL=5
     ROWS=6
-    topRow = 'QWERTYUIOP'
+    topRow = 'QWERTZUIOP'
     midRow = 'ASDFGHJKL'
-    bottomRow = 'ZXCVBNM'
+    bottomRow = 'YXCVBNM'
     layout =[[[sg.Button(chars[i], size=(4, 2), key=(i,j), pad=(0,0), button_color=('white')) for j in range(COL)] for i in range(ROWS)],
                 [sg.Txt('Gib das nächste Wort ein:')],
                 [sg.In(size=(12,2), key='IN', do_not_clear=False, focus=True)],
@@ -46,8 +43,17 @@ def main():
                 chars = list(map(lambda x: x.upper(), chars))
                 for i in range(5):
                     win[row,i].update(chars[i])
-                fitchars(win, row,chars,result)
-                row +=1
+                row, chars, result, new_game = fitchars(win, row,chars,result)
+                if new_game:
+                    for i in range(ROWS): 
+                        for j in range(COL):
+                            win[i,j].update(chars[i], button_color=('White'))
+                    for c in topRow:
+                        win[c].update(button_color=sg.theme_button_color())
+                    for c in midRow:
+                        win[c].update(button_color=sg.theme_button_color())
+                    for c in bottomRow:
+                        win[c].update(button_color=sg.theme_button_color())
             else: 
                 sg.popup('Das Wort muss 5 Buchstaben haben!')
         if event == sg.WIN_CLOSED:
@@ -65,6 +71,7 @@ def chooseresult():
         result = random.choice(words)
     return result
 
+#search the indices of duplicate letters
 def duplist(seq, letter):
     start_at = -1
     dups = []
@@ -105,26 +112,21 @@ def fitchars(win, row, chars, result):
                 input[cdup] = 0
                 result2[cdup] = 0
                 win[row,cdup].update(button_color=('green'))
-#            else:
-#                dups = duplist(input, let)
-#                if nrinp == 1 and nrres == 1:
-#                    win[row, inpind].update(button_color=('yellow'))  
-#                    else:
-#                   
-#                    if nrdups == nrres:
-#                        for dupind in dups:
-#                            win[row, dupind].update(button_color=('yellow'))  
     if result2 == input:
         sg.popup('YAY, GEWONNEN!')
-        open_window(win)
-    if row == 5 and result != chars:
+        new_game = open_window(win)
+    elif row == 5 and result != chars:
         sg.popup('OH NO! DAS WAR WOHL NIX.')
-        open_window(win)
+        new_game = open_window(win)
+    else: 
+        row +=1
+        new_game = False
+    if new_game:
+        result, chars, row = start()
+    return row, chars, result, new_game
 
 #choose if you want to play another round    
 def open_window(win):
-    global result
-    global row
     layout = [[sg.Text("Und nun?")],
         [sg.Button("Nochmal?", key="new", bind_return_key=True), sg.Button('Exit')]]
     window = sg.Window("", layout, modal=True)
@@ -133,12 +135,12 @@ def open_window(win):
         if event == "Exit":
             window.close()
             win.close()
-            break
+            return False
         if event == sg.WIN_CLOSED:
             window.close()
-            break
+            return False
         if event == 'new':
             window.close()
-            main()
+            return True
 
 main()
