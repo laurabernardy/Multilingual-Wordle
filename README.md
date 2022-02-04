@@ -1,4 +1,4 @@
-# WannabeWordle
+![logo](logo.png)
 
 An (I must admit: ugly, but working!) clone of the word guessing game [wordle](https://www.powerlanguage.co.uk/wordle/) in german language (WannabeWordle == "Möchtegern Wordle"). It's a bloody beginner project, therefore it's written in python. Also there is an executable for win, mac and linux. An english or multilingual version and a web app is planned (yeah, i want to learn Typescript.).
 
