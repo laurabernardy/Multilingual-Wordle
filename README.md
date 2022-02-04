@@ -10,7 +10,7 @@ pip install pysimplegui
 ```
 If you choose the one without internal words list (for changing it etc.) make sure, that you put it in the same folder like the main py.
 
-With the executble file, you don't have to install the GUI, but it needs at least a python version on your computer installed. 
+With the executble file (also in releases as standalone), you don't have to install the GUI.
 
 # Rules
 
@@ -19,7 +19,7 @@ green => That this letter is at the right place
 yellow => The letter is in the word, but not at the right place
 it stays grey => The letter is not in the word
 
-Also the keyboard graphic tells you, which letters you used, which ones are right and which ones are false. 
+Also the keyboard graphic tells you, which letters you used, which ones are right and which ones are false (sometimes it's a little bit buggy, will fix that.)
 
 easy! Have fun!
 
