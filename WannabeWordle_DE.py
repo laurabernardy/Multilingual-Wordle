@@ -1,13 +1,12 @@
 import PySimpleGUI as sg
 import random
 
-#todo: not in words list, english version, javascript version (web app)
+#todo: Design stuff, not in words list, multilingual version, javascript version (web app)
 sg.theme('Default1')
 
 #main function of game and layout
 def main():
     result = chooseresult()
-    print(result)
     COL=5
     ROWS=6
     chars=['','','','','','']
@@ -71,11 +70,8 @@ def fitchars(win, row, chars, result):
         win[b].update(button_color=('Grey'))
     for let in result2:
         if let in input:
-            print(input)
             resind = result2.index(let)
             inpind = input.index(let)
-            print(resind)
-            print(inpind)
             if  resind == inpind:
                 input[resind] = 0
                 result2[resind] = 0
