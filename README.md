@@ -4,11 +4,13 @@ An (I must admit: ugly, but working!) clone of the word guessing game [wordle](h
 
 # Get started
 
-For using the little game you have to install PySimpleGUI with
+For using the little game with python you have to install PySimpleGUI with
 ```
 pip install pysimplegui
 ```
-If you choose the one without internal words list (for changing it etc.) make sure, that you put it in the same folder like the main py. 
+If you choose the one without internal words list (for changing it etc.) make sure, that you put it in the same folder like the main py.
+
+With the executble file, you don't have to install the GUI, but it needs at least a python version on your computer installed. 
 
 # Rules
 
