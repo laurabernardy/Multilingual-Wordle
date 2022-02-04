@@ -10,7 +10,7 @@ pip install pysimplegui
 ```
 If you choose the one without internal words list (for changing it etc.) make sure, that you put it in the same folder like the main py.
 
-With the executble file, you don't have to install the GUI.
+With the executble file (also in releases as standalone), you don't have to install the GUI.
 
 # Rules
 
