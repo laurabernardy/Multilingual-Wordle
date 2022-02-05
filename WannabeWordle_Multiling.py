@@ -134,9 +134,7 @@ def indlist(seq, letter):
 #win or loose message
 def fitchars(win, row, chars, result, file):
     result2 = list(result)
-    print (f"result{result2}")
     input = chars
-    print (f"chars{chars}")
     common = list(set(result2).intersection(input))
     for l in common:
         win[l].update(button_color=('lightgreen'))
@@ -145,12 +143,9 @@ def fitchars(win, row, chars, result, file):
         win[b].update(button_color=('Grey'))
     for let in result2:
         dupsres = indlist(result2, let)
-        print(f'dupsres{dupsres}')
         if let in input:
             dupsinp = indlist(input, let)
-            print(f'dupsinp{dupsinp}')
             commoninds = list(set(dupsinp).intersection(dupsres))
-            print(f'commoninds{commoninds}')
             if len(commoninds) !=0:
                 for ind in commoninds:
                     input[ind] = 0
@@ -160,7 +155,6 @@ def fitchars(win, row, chars, result, file):
                     #dupsinp.remove(ind)
             counter=0
             for ix in dupsinp:
-                print(f'{ix}')
                 if ix not in commoninds:
                     counter+=1
                     if counter <= (len(dupsres) - len(commoninds)):
