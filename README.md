@@ -1,7 +1,6 @@
 ![logo](logo.png)
 
 An (I must admit: ugly, but working!) clone of the word guessing game [wordle](https://www.powerlanguage.co.uk/wordle/) in german language (WannabeWordle == "Möchtegern Wordle") and a version, where you can choose, in which language you want to guess the words (English, German, French, Luxemburgish at the moment. Some more will soon be added). It's a bloody beginner project, therefore it's written in python. Also there is an executable for win, mac and linux. A web app is planned (yeah, i want to learn TypeScript.).
-Unfortunately, accents and special characters (latin characters) are reduced to plain characters (à --> a).
 
 # Get started
 
@@ -25,6 +24,10 @@ it stays grey => The letter is not in the word
 Also the keyboard graphic tells you, which letters you used, which ones are right and which ones are false (sometimes it's a little bit buggy, will fix that.)
 
 easy! Have fun!
+
+# Please notice
+Unfortunately, accents and special characters (latin characters) are reduced to plain characters (à --> a).
+Also the word lists are not filtered for strange content. They are frequency lists from wikipedia and national language corpora.
 
 # Footnotes
 
