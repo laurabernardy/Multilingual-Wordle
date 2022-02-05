@@ -115,8 +115,8 @@ def chooseresult(path):
     result = random.choice(words)
     return result
 
-#search the indices of duplicate letters
-def duplist(seq, letter):
+#search all indices of letter
+def indlist(seq, letter):
     start_at = -1
     dups = []
     while True:
@@ -134,30 +134,39 @@ def duplist(seq, letter):
 #win or loose message
 def fitchars(win, row, chars, result, file):
     result2 = list(result)
+    print (f"result{result2}")
     input = chars
+    print (f"chars{chars}")
     common = list(set(result2).intersection(input))
-    print (common)
     for l in common:
         win[l].update(button_color=('lightgreen'))
     badchars = set(chars) - set(common)
     for b in badchars:
         win[b].update(button_color=('Grey'))
-    for i in range(len(result2)):
-        let = result2[i]
+    for let in result2:
+        dupsres = indlist(result2, let)
+        print(f'dupsres{dupsres}')
         if let in input:
-            inpind = input.index(let)
-            nrres = result2.count(let)
-            nrinp = input.count(let)
-            dupsres = duplist(input, let)
-            dupsinp = duplist(result2, let)
-            commondups = list(set(dupsinp).intersection(dupsres))
-            if nrres >= nrinp:
-                 win[row, inpind].update(button_color=('yellow'))  
-            for cdup in commondups:
-                input[cdup] = 0
-                result2[cdup] = 0
-                win[row,cdup].update(button_color=('green'))
-    if result2 == input:
+            dupsinp = indlist(input, let)
+            print(f'dupsinp{dupsinp}')
+            commoninds = list(set(dupsinp).intersection(dupsres))
+            print(f'commoninds{commoninds}')
+            if len(commoninds) !=0:
+                for ind in commoninds:
+                    input[ind] = 0
+                    result2[ind] = 0
+                    win[row,ind].update(button_color=('green'))
+                    #dupsres.remove(ind)
+                    #dupsinp.remove(ind)
+            counter=0
+            for ix in dupsinp:
+                print(f'{ix}')
+                if ix not in commoninds:
+                    counter+=1
+                    if counter <= (len(dupsres) - len(commoninds)):
+                        win[row,ix].update(button_color=('yellow'))
+
+    if result2 == chars:
         sg.popup('YAY, WIN!')
         new_game = open_window(win)
     elif row == 5 and result != chars:
