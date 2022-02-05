@@ -1,5 +1,4 @@
 ![logo](logo.png)
-<meta name="google-site-verification" content="MX8kPKC76t4LhECNv81HBUnUSfhRuaku3W7rFjye-AA" />
 
 An (I must admit: ugly, but working!(with some bugs)) clone of the word guessing game [wordle](https://www.powerlanguage.co.uk/wordle/) where you can choose, in which language you want to guess the words (English, German, French, Luxemburgish at the moment. Some more will soon be added). It's a bloody beginner project, therefore it's written in python. Also there is an executable for win, mac and linux. A web app is planned (yeah, i want to learn TypeScript.).
 
