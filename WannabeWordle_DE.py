@@ -65,7 +65,7 @@ def main():
 
 #select a random word as result from external list
 def chooseresult():
-    with open("words.txt", "r") as file:
+    with open("lang/de.txt", "r") as file:
         allText = file.read()
         words = list(map(str.upper, allText.split()))
         result = random.choice(words)
