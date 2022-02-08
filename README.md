@@ -27,21 +27,19 @@ easy! Have fun!
 
 # Please notice
 Unfortunately, accents and special characters (latin characters) are reduced to plain characters (à --> a).
-Also the word lists are not filtered for strange content. They are frequency lists from wikipedia and national language corpora.
+Also the word lists are not filtered for strange or explicit content. They are mostly frequency lists from wikipedia, open subtitles and national language corpora.
 
 # Footnotes
 
 Game was created by using [PySimpleGUI](https://github.com/PySimpleGUI/PySimpleGUI) (Also the keyboard was inspired by the "cookbook")
 
 Wordlists: 
-German: [top100000](https://www1.udel.edu/LLL/language/deutsch/top10000.pdf)
-English: [kaggle](https://www.kaggle.com/rtatman/english-word-frequency)
-Luxembourgish: [6000wierder](https://6000wierder.lu/)
+Just original fragments, not the whole lists:
+German, English, Italian: [Github](https://github.com/hermitdave/FrequencyWords)
+Luxembourgish: [lod](https://data.public.lu/en/datasets/letzebuerger-online-dictionnaire-raw-data/)
 French: [wiktionary](https://en.wiktionary.org/wiki/Wiktionary:French_frequency_lists/1-2000)
-Italian: [top10000words](http://www.top10000words.com/Five_letter_Italian_words.html)
 Spanish: [rae corpus](http://corpus.rae.es/frec/10000_formas.TXT)
 Swedish: [Kelly list](https://spraakbanken.gu.se/en/resources/kelly)
-
 
 Thanks to my favourite Nebelchen for inspiring me with his awesome excel work! 
 
