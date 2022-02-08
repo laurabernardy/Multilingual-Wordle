@@ -35,16 +35,16 @@ Game was created by using [PySimpleGUI](https://github.com/PySimpleGUI/PySimpleG
 
 Wordlists: 
 Just original fragments, not the whole lists and under common licence:
-German, English, Italian: [Github](https://github.com/hermitdave/FrequencyWords)
-Luxembourgish: [lod](https://data.public.lu/en/datasets/letzebuerger-online-dictionnaire-raw-data/)
-French: [wiktionary](https://en.wiktionary.org/wiki/Wiktionary:French_frequency_lists/1-2000)
-Spanish: [rae corpus](http://corpus.rae.es/frec/10000_formas.TXT)
-Swedish: [Kelly list](https://spraakbanken.gu.se/en/resources/kelly)
-Dutch: [wiktionary](https://en.wiktionary.org/wiki/Wiktionary:Frequency_lists/Dutch_wordlist)
-Portuguese: [wiktionary](https://en.wiktionary.org/wiki/Wiktionary:Frequency_lists/Portuguese_wordlist)
-Norwegian: [wiktionary](https://en.wiktionary.org/wiki/Wiktionary:Frequency_lists/Norwegian)
-Finnish: [csc.fi](https://web.archive.org/web/20140807150829/http://www.csc.fi/tutkimus/alat/kielitiede/taajuussanasto-B9996/view)
-Danish: [dsl corpus](https://korpus.dsl.dk/resources/licences/dsl-open.html#list)
+German, English, Italian: [Github](https://github.com/hermitdave/FrequencyWords),
+Luxembourgish: [lod](https://data.public.lu/en/datasets/letzebuerger-online-dictionnaire-raw-data/),
+French: [wiktionary](https://en.wiktionary.org/wiki/Wiktionary:French_frequency_lists/1-2000),
+Spanish: [rae corpus](http://corpus.rae.es/frec/10000_formas.TXT),
+Swedish: [Kelly list](https://spraakbanken.gu.se/en/resources/kelly),
+Dutch: [wiktionary](https://en.wiktionary.org/wiki/Wiktionary:Frequency_lists/Dutch_wordlist),
+Portuguese: [wiktionary](https://en.wiktionary.org/wiki/Wiktionary:Frequency_lists/Portuguese_wordlist),
+Norwegian: [wiktionary](https://en.wiktionary.org/wiki/Wiktionary:Frequency_lists/Norwegian),
+Finnish: [csc.fi](https://web.archive.org/web/20140807150829/http://www.csc.fi/tutkimus/alat/kielitiede/taajuussanasto-B9996/view),
+Danish: [dsl corpus](https://korpus.dsl.dk/resources/licences/dsl-open.html#list),
 Latin: [latin 202](https://documents.kenyon.edu/classics/current/2099.wordlistforlatn202alphabetical.pdf)
 
 
