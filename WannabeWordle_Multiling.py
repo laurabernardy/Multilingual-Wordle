@@ -85,7 +85,7 @@ def main():
 
 def selectlang():
     layout = [[sg.Text("Choose Language")],
-         [sg.Combo(['Deutsch', 'English','Letzebuergesch', 'Francaise', 'Espagnol', 'Italiano', 'Svenska'], key='LANG'), sg.Button('', image_data=changelang, image_subsample=15, bind_return_key=True, key='cl')]]
+         [sg.Combo(['Deutsch', 'English','Letzebuergesch', 'Francaise', 'Espagnol', 'Italiano', 'Svenska', 'Nederlands', 'Portogues', 'Norsk', 'Suomen kieli', 'Dansk', 'Latinus'], key='LANG'), sg.Button('', image_data=changelang, image_subsample=15, bind_return_key=True, key='cl')]]
     langwin = sg.Window("", layout, modal=True, element_justification='c')
     while True:
         event, values = langwin.read()
@@ -109,6 +109,18 @@ def selectlang():
                 file = "lang/it.txt"
             if values['LANG'] == 'Svenska':
                 file = "lang/swe.txt"
+            if values['LANG'] == 'Nederlands':
+                file = "lang/nl.txt"
+            if values['LANG'] == 'Portogues':
+                file = "lang/pt.txt"
+            if values['LANG'] == 'Norsk':
+                file = "lang/no.txt"
+            if values['LANG'] == 'Suomen kieli':
+                file = "lang/fi.txt"
+            if values['LANG'] == 'Dansk':
+                file = "lang/dk.txt"
+            if values['LANG'] == 'Latinus':
+                file = "lang/lat.txt"
             langwin.close()
             return file
 
