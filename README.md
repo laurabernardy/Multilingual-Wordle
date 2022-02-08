@@ -27,7 +27,7 @@ easy! Have fun!
 
 # Please notice
 Unfortunately, accents and special characters (latin characters) are reduced to plain characters (à --> a).
-Also the word lists are not filtered for strange content. They are frequency lists from wikipedia and national language corpora.
+Also the word lists are not filtered for strange or explicit content. They are mostly frequency lists from wikipedia, open subtitles and national language corpora.
 
 # Footnotes
 
