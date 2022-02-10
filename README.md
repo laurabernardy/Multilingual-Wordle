@@ -12,7 +12,7 @@ and start it with the lang folder in the same folder as the python script.
 
 If you choose the one without internal words list (for changing it etc.) make sure, that you put it in the same folder like the main py.
 
-With the executble file (also in releases as standalone), you don't have to install the GUI.
+With the executble file (also in releases as standalone), you don't have to install the GUI. Sometimes Windows Defender or other Antimalware scanners will show a warning, when you try to execute the file. It's because of the base64 encrypted images in the game. I garantuee that the software is free from malware. 
 
 # Rules
 
