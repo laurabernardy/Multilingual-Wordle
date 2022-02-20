@@ -178,7 +178,7 @@ def fitchars(win, row, chars, result, file):
                         win[row,ix].update(button_color=('yellow'))
 
     if result2 == chars:
-        sg.popup('YAY, WIN!', image=winner, background_color='green', no_titlebar=True)
+        sg.popup('YAY, WIN!', image=winner, background_color='green' no_titlebar=True)
         new_game = open_window(win)
     elif row == 5 and result != chars:
         sg.popup(f'It was: {result}', image=lost, background_color= 'grey', no_titlebar=True)
